@@ -51,5 +51,9 @@ router.post('/login', checkUsernameExists, (req, res, next) => {
     }
 });
 
+router.get('/users', restricted, async (req, res) => {
+    res.json(await Users.getAll());
+});
+
 
 module.exports = router;
