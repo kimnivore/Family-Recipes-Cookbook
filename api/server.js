@@ -2,10 +2,10 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 
-const authRouter = require('./auth/auth-router');
-const recipesRouter = require('./recipes/recipes-router');
+//const authRouter = require('./auth/auth-router');
+//const recipesRouter = require('./recipes/recipes-router');
 
-const { restricted } = require('./auth/auth-middleware');
+//const { restricted } = require('./auth/auth-middleware');
 
 const server = express();
 
