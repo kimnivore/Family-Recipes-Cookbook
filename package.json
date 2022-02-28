@@ -11,6 +11,7 @@
     "rollback:prod": "heroku run knex migrate:rollback -a family-recipes-cookbook1",
     "database:prod": "heroku pg:psql -a family-recipes-cookbook1",
     "seed:prod": "heroku run knex seed:run -a family-recipes-cookbook1",
+    "cleanup": "knex seed:run --specific=01-cleanup.js",
     "test": "cross-env NODE_ENV=testing jest --verbose --runInBand",
     "deploy": "git push heroku main"
   },
