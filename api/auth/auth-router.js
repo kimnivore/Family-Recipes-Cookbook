@@ -20,7 +20,7 @@ const Users = require('../users/users-model');
 const tokenBuilder = require('./token-builder');
 
 const router = require('express').Router();
-const { checkUsernameTaken, checkUsernameExists, validateData } = require('./auth-middleware');
+const { checkUsernameTaken, checkUsernameExists, validateData, restricted } = require('./auth-middleware');
 const { JWT_SECRET, BCRYPT_ROUNDS } = require('../secrets');
 
 
