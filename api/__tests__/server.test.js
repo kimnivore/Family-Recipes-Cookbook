@@ -18,7 +18,7 @@ it('sanity check', () => {
 })
 
 describe('server.js', () => {
-  it('is the correct testing environment', async () => {
+  test('is the correct testing environment', async () => {
     expect(process.env.NODE_ENV).toBe('testing')
   })
 })
