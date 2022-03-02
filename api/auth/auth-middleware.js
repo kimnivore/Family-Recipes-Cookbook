@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../secrets');
 const Users = require('../users/users-model');
 
-
+//http get :9000/api/recipes Authorization:decodedToken
 const restricted = (req, res, next) => {
     const token = req.headers.authorization;
     if(!token) {

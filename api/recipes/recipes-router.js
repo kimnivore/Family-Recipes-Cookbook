@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Recipes = require('../recipes/recipes-model');
 const { checkUserId, checkRecipeId, checkUserIdParams } = require('./recipes-middleware');
 
+//http get :9000/api/recipes Authorization:decodedToken
 router.get('/', (req, res, next) => {
     Recipes.getAllRecipes()
         .then(recipes => {

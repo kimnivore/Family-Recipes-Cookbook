@@ -35,7 +35,7 @@ router.post('/login', checkUsernameExists, (req, res, next) => {
 });
 
 router.get('/users', restricted, async (req, res) => {
-    res.json(await Users.getAll());
+    res.status(200).json(await Users.getAll());
 });
 
 router.post('/users', async (req, res) => {
