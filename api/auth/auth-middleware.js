@@ -28,7 +28,7 @@ const checkUsernameTaken = async (req, res, next) => {
     } catch(err) {
         next(err);
     }
-}
+};
 
 const checkUsernameExists = async (req, res, next) => {
     try {
@@ -42,7 +42,7 @@ const checkUsernameExists = async (req, res, next) => {
     } catch(err) {
         next(err);
     }
-}
+};
 
 const validateData = (req, res, next) => {
     const { username, password } = req.body;
@@ -51,12 +51,11 @@ const validateData = (req, res, next) => {
     } else {
         next()
     }
-    
-}
+};
 
 module.exports = {
     restricted,
     checkUsernameTaken,
     checkUsernameExists,
     validateData
-}
+};

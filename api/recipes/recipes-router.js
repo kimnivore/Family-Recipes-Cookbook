@@ -14,7 +14,7 @@ router.get('/:recipe_id', checkRecipeId, async (req,res,next) => {
     try {
         const recipe = await Recipes.getById(req.recipeId);
         if(recipe) {
-            res.status(200).json(item);
+            res.status(200).json(recipe);
         } else {
             res.status(401).json({
                 message: `Recipe with ID ${req.recipeId} does not exist.`,

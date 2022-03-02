@@ -22,6 +22,7 @@ async function addRecipe(recipe) {
     ]);
     return newRecipe;
 }
+
 function updateRecipe(id, changes) {
     return db('recipes')
         .where('recipe_id', id)

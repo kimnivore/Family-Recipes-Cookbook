@@ -1,19 +1,3 @@
-
-// function getAllUsers() { return db('users') }
-// async function insertUser(user) {
-//     // WITH POSTGRES WE CAN PASS A "RETURNING ARRAY" AS 2ND ARGUMENT TO knex.insert/update
-//     // AND OBTAIN WHATEVER COLUMNS WE NEED FROM THE NEWLY CREATED/UPDATED RECORD
-//     const [newUserObject] = await db('users').insert(user, ['user_id', 'username', 'password'])
-//     return newUserObject // { user_id: 7, username: 'foo', password: 'xxxxxxx' }
-//   }
-//   router.get('/api/users', async (req, res) => {
-//     res.json(await getAllUsers())
-//   })
-  
-//   router.post('/api/users', async (req, res) => {
-//     res.status(201).json(await insertUser(req.body))
-//   })
-
 const bcrypt = require('bcryptjs');
 const Users = require('../users/users-model');
 const tokenBuilder = require('./token-builder');
@@ -52,6 +36,10 @@ router.post('/login', checkUsernameExists, (req, res, next) => {
 
 router.get('/users', restricted, async (req, res) => {
     res.json(await Users.getAll());
+});
+
+router.post('/users', async (req, res) => {
+    res.status(201).json(await Users.add());
 });
 
 
