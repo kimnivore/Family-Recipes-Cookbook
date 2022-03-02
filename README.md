@@ -1,4 +1,229 @@
-# Build Week Scaffolding
+# <p>Backend For Family Recipes Cookbook01.</P>
+
+## <p>https://family-recipes-cookbook1.herokuapp.com/</p>
+
+## REGISTER and LOGIN ENDPOINTS
+
+### `[POST] /api/auth/register`
+
+- Request Body:
+  - _username required (must be unique)_
+  - _password required_
+
+_What You Send_
+
+```json
+{
+  "username": "coco",
+  "password": "1234"
+}
+```
+
+_Server Response_
+
+```json
+{
+  "message": "coco has been successfully registered!",
+  "user_id": 5
+}
+```
+
+### `[POST] /api/auth/login`
+
+- Request Body:
+  - _username required_
+  - _password required_
+
+_What You Send_
+
+```json
+{
+  "username": "coco",
+  "password": "1234"
+}
+```
+
+_Server Response_
+
+```json
+{
+  "message": "Welcome coco!",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0Ijo1LCJ1c2VybmFtZSI6ImN1cnRpcyIsImlhdCI6MTY0NjI2MjEzOCwiZXhwIjoxNjQ2MzQ4NTM4fQ.GrNBAi7LJbbkkDhoXdHYQx8Y6o0FsQ3fc_4ptKDsB94",
+  "user_id": 5
+}
+```
+
+<p>You will use the token given by the server for authentication.</p>
+<p>User ID should also be stored as this will be required in the header when adding items.</p>
+
+<p>Sample Credentials you can use for login testing:</p>
+
+- `username: kim, password: 1234`
+
+- `username: yong, password: 5678`
+
+### `[GET] /api/auth/users`
+
+**_RESTRICTED ENDPOINT_** (token required)
+
+- Returns all users in database, currently public facing but will be restricted.
+
+_Server Response_
+
+```json
+{
+  "user_id": "1",
+  "username": "kim",
+},
+{
+  "user_id": "2",
+  "username": "yong",
+}
+"etc..."
+```
+
+<hr>
+
+## RECIPES ENDPOINTS
+
+### `[GET] /api/recipes/`
+
+**_RESTRICTED ENDPOINT_** (token required)
+
+- Returns array of all recipes in the database.
+- 2 sample  have been added.
+
+_Server Response_
+
+```json
+[   {
+        "recipe_id": 1,
+        "recipe_name": "Spaghetti",
+        "recipe_ingredients": "pasta, canned tomatoes, ground beef, Trader Joe meatballs, mushrooms, onions, garlic, italian seasoning, garlic powder, salt, sugar, fish sauce, chili flakes",
+        "recipe_instructions": "1. boil pasta, 2. make sauce, 3. season and serve",
+        "item_category": "Pasta",
+        "recipe_source": "kim",
+        "user_id": 1
+    },
+  {
+        "recipe_id": 2,
+        "recipe_name": "Chicken Pho",
+        "recipe_ingredients": "rice noodles, chicken, onion, ginger, fish sauce, salt, rock sugar, mushroom seasoning, bean sprout, thai basil, lime, green onion, cilantro",
+        "recipe_instructions": "1. make bone broth, 2. boil rice noodles, 3. season and serve",
+        "item_category": "Soup",
+        "recipe_source": "kim",
+        "user_id": 1
+    },
+    "etc..."
+
+]
+
+```
+### `[POST] /api/recipes/`
+
+**_RESTRICTED ENDPOINT_** (token AND user_id required)
+
+- Adds a new recipe in the database. 
+  - **required information:**
+  - _recipe_name (string)_
+  - _recipe_source (string)_
+  _ _recipe_ingredients (string)_
+  - _recipe_instructions (string)_
+  - _recipe_category (string)_
+
+_What You Send:_
+
+```json
+{
+  "recipe_name": "Jasmine Rice",
+  "recipe_source": "mom",
+  "recipe_ingredients": "rice, water",
+  "recipe_instructions": "1. wash rice, 2. measure water using finger trick, 3. cook in rice cooker",
+  "recipe_category": "Side dish",
+  "user_id": 1
+}
+```
+
+_Server Response:_
+
+```json
+{
+  "recipe_name": "Jasmine Rice",
+  "recipe_source": "mom",
+  "recipe_ingredients": "rice, water",
+  "recipe_instructions": "1. wash rice, 2. measure water using finger trick, 3. cook in rice cooker",
+  "recipe_category": "Side dish",
+}
+```
+
+### `[GET] /api/recipes/:recipe_id`
+
+**_RESTRICTED ENDPOINT_** (token required)
+
+- Returns the single item associated with that item id. 
+
+_Server Response:_
+
+```json
+{
+  "item_id": 1,
+  "item_name": "Rice",
+  "item_description": "Locally grown rice",
+  "item_price": 7.99,
+  "item_category": "Grains",
+  "user_id": 1
+}
+```
+
+### `[GET] /api/items/user/:user_id`
+
+**_RESTRICTED ENDPOINT_** (token required)
+
+- Returns all items added by a user with provided user id. 
+
+_Server Response:_
+
+```json
+[   
+    {
+        "item_id": 1,
+        "item_name": "Rice",
+        "item_description": "Locally grown long grain rice.",
+        "item_price": 7.99,
+        "item_category": "Grains",
+        "user_id": 1
+    },
+    {
+        "item_id": 2,
+        "item_name": "Bananas",
+        "item_description": "Locally grown bananas.",
+        "item_price": 12.99,
+        "item_category": "Fruits",
+        "user_id": 1
+    }
+    "etc..."
+
+]
+```
+
+### `[DELETE] /api/items/:item_id`
+
+**_RESTRICTED ENDPOINT_** (token required)
+
+- Deletes the single item with provided item id.
+
+_Server Response:_
+
+```json
+{
+    "message": "Deleted 1 item."
+}
+```
+
+
+
+
+<!-- # Build Week Scaffolding
 
 First READ these instructions to get an overview of what's involved in scaffolding an Express + PostgreSQL app that deploys to Heroku.
 
@@ -89,4 +314,4 @@ Install [Postgres](https://www.postgresql.org/download/) on your computer, takin
 
 The following demo explains how to set up a project using PostgreSQL and Heroku.
 
-[![Setting up PostgreSQL for Build Week](https://tk-assets.lambdaschool.com/e43c6d1e-5ae8-4142-937b-b865d71925fb_unit-4-build-week-project-scaffolding.png)](https://bloomtech-1.wistia.com/medias/2625bl7sei)
+[![Setting up PostgreSQL for Build Week](https://tk-assets.lambdaschool.com/e43c6d1e-5ae8-4142-937b-b865d71925fb_unit-4-build-week-project-scaffolding.png)](https://bloomtech-1.wistia.com/medias/2625bl7sei) -->
