@@ -56,7 +56,7 @@ router.post('/', checkUserId, async (req, res, next) => {
 router.put('/:recipe_id', checkRecipeId, async (req, res, next) => {
     try {
         const recipeToUpdate = await Recipes.updateRecipe(req.params.recipe_id, req.body);
-        res.status(200).json({message: `Updated ${recipeToUpdate}`});
+        res.status(200).json(recipeToUpdate);
     } catch(err) {
         next(err);
     }

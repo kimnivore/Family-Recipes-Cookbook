@@ -54,7 +54,7 @@ _Server Response_
 ```
 
 <p>You will use the token given by the server for authentication.</p>
-<p>User ID should also be stored as this will be required in the header when adding items.</p>
+<p>User ID should also be stored as this will be required in the header when adding recipes.</p>
 
 <p>Sample Credentials you can use for login testing:</p>
 
@@ -101,7 +101,7 @@ _Server Response_
         "recipe_name": "Spaghetti",
         "recipe_ingredients": "pasta, canned tomatoes, ground beef, Trader Joe meatballs, mushrooms, onions, garlic, italian seasoning, garlic powder, salt, sugar, fish sauce, chili flakes",
         "recipe_instructions": "1. boil pasta, 2. make sauce, 3. season and serve",
-        "item_category": "Pasta",
+        "recipe_category": "Pasta",
         "recipe_source": "kim",
         "user_id": 1
     },
@@ -110,7 +110,7 @@ _Server Response_
         "recipe_name": "Chicken Pho",
         "recipe_ingredients": "rice noodles, chicken, onion, ginger, fish sauce, salt, rock sugar, mushroom seasoning, bean sprout, thai basil, lime, green onion, cilantro",
         "recipe_instructions": "1. make bone broth, 2. boil rice noodles, 3. season and serve",
-        "item_category": "Soup",
+        "recipe_category": "Soup",
         "recipe_source": "kim",
         "user_id": 1
     },
@@ -160,63 +160,79 @@ _Server Response:_
 
 **_RESTRICTED ENDPOINT_** (token required)
 
-- Returns the single item associated with that item id. 
+- Returns the single recipe associated with that recipe id. 
 
 _Server Response:_
 
 ```json
 {
-  "item_id": 1,
-  "item_name": "Rice",
-  "item_description": "Locally grown rice",
-  "item_price": 7.99,
-  "item_category": "Grains",
-  "user_id": 1
+    "recipe_id": 1,
+    "recipe_name": "Spaghetti",
+    "recipe_source": "kim",
+    "recipe_ingredients": "pasta, canned tomatoes, ground beef, Trader Joe meatballs, mushrooms, onions, garlic, italian seasoning, garlic powder, salt, sugar, fish sauce, chili flakes",
+    "recipe_instructions": "1. boil pasta, 2. make sauce, 3. season and serve",
+    "recipe_category": "Pasta",
+    "user_id": 1
 }
 ```
 
-### `[GET] /api/items/user/:user_id`
+### `[GET] /api/recipes/user/:user_id`
 
 **_RESTRICTED ENDPOINT_** (token required)
 
-- Returns all items added by a user with provided user id. 
+- Returns all recipes added by a user with provided user id. 
 
 _Server Response:_
 
 ```json
 [   
-    {
-        "item_id": 1,
-        "item_name": "Rice",
-        "item_description": "Locally grown long grain rice.",
-        "item_price": 7.99,
-        "item_category": "Grains",
+     {
+        "recipe_id": 1,
+        "recipe_name": "Spaghetti",
+        "recipe_source": "kim",
+        "recipe_ingredients": "pasta, canned tomatoes, ground beef, Trader Joe meatballs, mushrooms, onions, garlic, italian seasoning, garlic powder, salt, sugar, fish sauce, chili flakes",
+        "recipe_instructions": "1. boil pasta, 2. make sauce, 3. season and serve",
+        "recipe_category": "Pasta",
         "user_id": 1
     },
     {
-        "item_id": 2,
-        "item_name": "Bananas",
-        "item_description": "Locally grown bananas.",
-        "item_price": 12.99,
-        "item_category": "Fruits",
+        "recipe_id": 2,
+        "recipe_name": "Chicken Pho",
+        "recipe_source": "kim",
+        "recipe_ingredients": "rice noodles, chicken, onion, ginger, fish sauce, salt, rock sugar, mushroom seasoning, bean sprout, thai basil, lime, green onion, cilantro",
+        "recipe_instructions": "1. make bone broth, 2. boil rice noodles, 3. season and serve",
+        "recipe_category": "Soup",
         "user_id": 1
-    }
+    },
     "etc..."
 
 ]
 ```
-
-### `[DELETE] /api/items/:item_id`
+### `[PUT] /api/recipes/:recipe_id`
 
 **_RESTRICTED ENDPOINT_** (token required)
 
-- Deletes the single item with provided item id.
+- Updates the single recipe with provided recipe id.
 
 _Server Response:_
 
 ```json
 {
-    "message": "Deleted 1 item."
+    "message": "Updated recipe."
+}
+```
+
+### `[DELETE] /api/recipes/:recipe_id`
+
+**_RESTRICTED ENDPOINT_** (token required)
+
+- Deletes the single recipe with provided recipe id.
+
+_Server Response:_
+
+```json
+{
+    "message": "Deleted 1 recipe."
 }
 ```
 
