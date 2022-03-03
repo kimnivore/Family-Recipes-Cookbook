@@ -218,7 +218,14 @@ _Server Response:_
 
 ```json
 {
-    "message": "Updated recipe."
+    
+        "recipe_category": "side",
+        "recipe_id": 4,
+        "recipe_ingredients": "rice",
+        "recipe_instructions": "cook",
+        "recipe_name": "rice",
+        "recipe_source": "mom",
+        "user_id": 1
 }
 ```
 
